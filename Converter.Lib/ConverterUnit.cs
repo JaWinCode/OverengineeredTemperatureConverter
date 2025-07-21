@@ -1,13 +1,13 @@
 ﻿namespace Converter.Lib
 {
-    internal abstract class ConverterUnit
+    internal abstract class ConverterUnit<TValue>
     {
-        internal ConverterUnit(decimal value)
+        internal ConverterUnit(TValue value)
         {
             Value = value;
         }
 
-        internal decimal Value { get; set; }
+        internal TValue Value { get; set; }
         public abstract string Suffix { get; }
         public override string ToString() => $"{Value} {Suffix}";
     }

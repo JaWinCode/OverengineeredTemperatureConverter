@@ -1,8 +1,8 @@
-﻿using Converter.Lib.TemperatureUnits;
+﻿using Converter.Lib.Units.TemperatureUnits;
 
 namespace Converter.Lib
 {
-    internal class TemperatureConverter : Converter
+    internal class TemperatureConverter : Converter<decimal>
     {
         internal TemperatureConverter()
         {
