@@ -4,6 +4,7 @@
            TargetType="RadioButton">
         <Setter Property="Background"
                 Value="{DynamicResource BtnDefaultBrush}" />
+        <Setter Property="Foreground" Value="Black" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
@@ -24,12 +25,14 @@
                                 TargetName="border"
                                 Property="Background"
                                 Value="{StaticResource BtnActiveBrush}" />
+                            <Setter Property="Foreground" Value="White" />
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter 
                                 TargetName="border"
                                 Property="Background"
                                 Value="{StaticResource BtnActiveBrush}" />
+                            <Setter Property="Foreground" Value="White" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

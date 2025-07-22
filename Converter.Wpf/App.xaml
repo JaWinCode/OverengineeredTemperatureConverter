@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ColorBrushes.xaml"/>
+                <ResourceDictionary Source="Resources.xaml"/>
                 <ResourceDictionary Source="NavButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
