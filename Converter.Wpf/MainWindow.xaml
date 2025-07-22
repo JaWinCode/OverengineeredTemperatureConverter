@@ -7,13 +7,22 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
-        Title="MainWindow" Height="450" Width="800" Background="Transparent">
+        AllowsTransparency="True"
+        Background="Transparent"
+        Title="Converter" Height="450" Width="800">
     <Border
         BorderBrush="#D1D1D1"
         BorderThickness="1"
         CornerRadius="20">
         <StackPanel>
-            <Border Height="30" BorderThickness="0 0 0 1" BorderBrush="#D1D1D1">
+            <StackPanel.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=mask}"/>
+            </StackPanel.OpacityMask>
+            <Border Name="mask" Background="White" CornerRadius="7"/>
+            <Border 
+                Height="30" 
+                BorderThickness="0 0 0 1" 
+                BorderBrush="#D1D1D1">
                 <Grid Background="#F9F8F9" MouseDown="TopBar_DragMove">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
