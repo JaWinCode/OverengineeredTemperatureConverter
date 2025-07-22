@@ -13,17 +13,10 @@
     <Border
         BorderBrush="#D1D1D1"
         BorderThickness="1"
-        CornerRadius="20">
+        CornerRadius="15">
         <StackPanel>
-            <StackPanel.OpacityMask>
-                <VisualBrush Visual="{Binding ElementName=mask}"/>
-            </StackPanel.OpacityMask>
-            <Border Name="mask" Background="White" CornerRadius="7"/>
-            <Border 
-                Height="30" 
-                BorderThickness="0 0 0 1" 
-                BorderBrush="#D1D1D1">
-                <Grid Background="#F9F8F9" MouseDown="TopBar_DragMove">
+            <Border CornerRadius="15,15,0,0" Height="30" BorderThickness="0 0 0 1" BorderBrush="#D1D1D1" Background="#F9F8F9" MouseDown="TopBar_DragMove">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="*"/>
@@ -35,12 +28,32 @@
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Center"
                         FontWeight="Bold"/>
-                    <Image 
-                        Grid.Column="2"
-                        Source="{StaticResource CloseImage}"
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Center"
-                        RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Button Background="Transparent" Grid.Column="2" Click="Close_Window" BorderThickness="0">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="BorderBrush" Value="Gray"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border 
+                                                Background="{TemplateBinding Background}" 
+                                                BorderBrush="{TemplateBinding BorderBrush}">
+                                                <ContentPresenter HorizontalAlignment="Center" 
+                                                      VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                        <Image
+                            Source="{StaticResource CloseImage}"
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center"
+                            RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
+
                 </Grid>
             </Border>
             <Grid Height="420">
@@ -48,8 +61,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Border BorderThickness="0 0 1 0" BorderBrush="#D1D1D1">
-                    <StackPanel Background="#F9F8F9">
+                <Border 
+                    BorderThickness="0, 0, 1, 0" 
+                    BorderBrush="#D1D1D1" 
+                    Background="#F9F8F9"
+                    CornerRadius="0,0,0,15">
+                    <StackPanel>
                         <RadioButton 
                             Content="Temperaturen"
                             FontSize="14"
@@ -66,6 +83,20 @@
                             BorderThickness="0"
                             Style="{StaticResource NavButton}"/>
                     </StackPanel>
+                </Border>
+                <Border
+                    Grid.Column="1"
+                    Background="White"
+                    CornerRadius="0,0,15,0">
+                    <ListView Name="listView">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                <GridViewColumn Header="Result" DisplayMemberBinding="{Binding Age}" Width="100"/>
+                                <GridViewColumn Header="Suffix" DisplayMemberBinding="{Binding Country}" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Border>
             </Grid>
         </StackPanel>

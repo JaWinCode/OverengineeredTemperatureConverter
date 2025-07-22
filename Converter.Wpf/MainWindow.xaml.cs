@@ -17,5 +17,10 @@ namespace Converter.Wpf
                 this.DragMove();
             }
         }
+
+        private void Close_Window(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
