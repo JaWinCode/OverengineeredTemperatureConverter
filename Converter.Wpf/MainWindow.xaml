@@ -74,28 +74,23 @@
                             Height="40"
                             BorderThickness="0"
                             Style="{StaticResource NavButton}"
-                            IsChecked="True"/>
+                            IsChecked="{Binding Path=Converters, Converter={StaticResource BoolToEnumConverter}, ConverterParameter=Converters.Temperatur}"/>
 
                         <RadioButton 
                             Content="Nummersysteme"
                             FontSize="14"
                             Height="40"
                             BorderThickness="0"
-                            Style="{StaticResource NavButton}"/>
+                            Style="{StaticResource NavButton}"
+                            IsChecked="{Binding Path=Converters, Converter={StaticResource BoolToEnumConverter}, ConverterParameter=Converters.NumberSystems}"/>
                     </StackPanel>
                 </Border>
                 <Border
                     Grid.Column="1"
                     Background="White"
                     CornerRadius="0,0,15,0">
-                    <ListView Name="listView">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Unit" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                                <GridViewColumn Header="Result" DisplayMemberBinding="{Binding Age}" Width="100"/>
-                                <GridViewColumn Header="Suffix" DisplayMemberBinding="{Binding Country}" Width="100"/>
-                            </GridView>
-                        </ListView.View>
+                    <ListView Name="listView" Height="300" Width="240">
+                        
                     </ListView>
                 </Border>
             </Grid>

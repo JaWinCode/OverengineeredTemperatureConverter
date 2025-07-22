@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Converter.Wpf"  >
     <Color x:Key="BtnDefault">#F9F8F9</Color>
     <Color x:Key="BtnActive">#6BA2A3</Color>
 
@@ -7,4 +8,8 @@
     <SolidColorBrush x:Key="BtnActiveBrush" Color="{StaticResource BtnActive}"></SolidColorBrush>
     
     <BitmapImage x:Key="CloseImage" UriSource="/Images/close.png" />
+
+
+    <local:BoolToEnumConverter x:Key="BoolToEnumConverter" />
+
 </ResourceDictionary>
