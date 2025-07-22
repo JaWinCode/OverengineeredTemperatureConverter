@@ -34,19 +34,19 @@
             </Grid.RowDefinitions>
             <Border BorderThickness="0 0 1 0" BorderBrush="#D1D1D1">
                 <StackPanel Background="#F9F8F9">
-                    <Button 
+                    <RadioButton 
                         Content="Temperaturen"
                         Margin="0,20,0,0"
                         Height="40"
                         BorderThickness="0"
                         Style="{StaticResource NavButton}"/>
 
-                    <Button 
+                    <RadioButton 
                         Content="Nummersysteme"
                         Height="40"
                         BorderThickness="0"
                         Style="{StaticResource NavButton}">
-                    </Button>
+                    </RadioButton>
                 </StackPanel>
             </Border>
         </Grid>

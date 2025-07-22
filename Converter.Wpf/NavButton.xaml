@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style x:Key="FlatSelectableButton"
+    <Style x:Key="NavButton"
            TargetType="RadioButton">
         <!-- Grund­optik -->
         <Setter Property="Background"
