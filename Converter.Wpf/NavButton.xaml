@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="NavButton"
            TargetType="RadioButton">
-        <!-- Grund­optik -->
         <Setter Property="Background"
                 Value="{DynamicResource BtnDefaultBrush}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -10,10 +9,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Border x:Name="border"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="4">
-                        <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center" />
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
@@ -21,14 +20,16 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="IsChecked"   Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="border"
-                                    Property="Background"
-                                    Value="{StaticResource BtnHoverBrush}" />
+                            <Setter 
+                                TargetName="border"
+                                Property="Background"
+                                Value="{StaticResource BtnActiveBrush}" />
                         </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="border"
-                                    Property="Background"
-                                    Value="{StaticResource BtnActiveBrush}" />
+                            <Setter 
+                                TargetName="border"
+                                Property="Background"
+                                Value="{StaticResource BtnActiveBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
