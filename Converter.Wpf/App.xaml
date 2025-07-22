@@ -8,6 +8,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources.xaml"/>
                 <ResourceDictionary Source="NavButton.xaml"/>
+                <ResourceDictionary Source="ResultView.xaml"/>
+                <ResourceDictionary Source="ResultViewItem.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

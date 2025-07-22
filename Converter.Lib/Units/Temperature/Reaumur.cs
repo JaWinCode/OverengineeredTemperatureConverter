@@ -4,7 +4,8 @@
     {
         private Reaumur(decimal value) : base(value) { }
 
-        public override string Suffix { get; } = "°Re";
+        public override string Suffix => "°Re";
+        public static string Name = "Réaumur";
 
         public static implicit operator Reaumur(decimal value) => new(value);
 

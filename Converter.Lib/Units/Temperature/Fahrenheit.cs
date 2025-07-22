@@ -4,7 +4,8 @@
     {
         private Fahrenheit(decimal value) : base(value) { }
 
-        public override string Suffix { get; } = "°F";
+        public override string Suffix => "°F";
+        public static string Name = "Fahrenheit";
 
         public static implicit operator Fahrenheit(decimal value) => new(value);
 

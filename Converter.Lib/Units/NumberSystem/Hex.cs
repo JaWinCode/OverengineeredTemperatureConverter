@@ -4,7 +4,8 @@
     {
         private Hex(string value) : base(value) { }
 
-        public override string Suffix { get; } = "hex";
+        public override string Suffix => "hex";
+        public static string Name = "Hex";
 
         public static implicit operator Hex(string value) => new(value);
 

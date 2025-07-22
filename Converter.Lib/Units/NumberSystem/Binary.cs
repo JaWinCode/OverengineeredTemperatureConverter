@@ -4,7 +4,8 @@
     {
         private Binary(string value) : base(value) { }
 
-        public override string Suffix { get; } = "bin";
+        public override string Suffix => "bin";
+        public static string Name = "Binary";
 
         public static implicit operator Binary(string value) => new(value);
 

@@ -4,7 +4,8 @@
     {
         private DecimalSys(string value) : base(value) { }
 
-        public override string Suffix { get; } = "dec";
+        public override string Suffix => "dec";
+        public static string Name = "Decimal";
 
         public static implicit operator DecimalSys(string value) => new(value);
 

@@ -4,7 +4,8 @@
     {
         private Rankine(decimal value) : base(value) { }
 
-        public override string Suffix { get; } = "°R";
+        public override string Suffix => "°R";
+        public static string Name = "Rankine";
 
         public static implicit operator Rankine(decimal value) => new(value);
 

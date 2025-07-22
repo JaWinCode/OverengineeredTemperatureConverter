@@ -9,13 +9,17 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
+        UseLayoutRounding="True"
         Title="Converter" Height="450" Width="800">
+    <Window.Resources>
+        <local:BoolToEnumConverter x:Key="BoolToEnumConverter" />
+    </Window.Resources>
     <Border
         BorderBrush="#D1D1D1"
         BorderThickness="1"
-        CornerRadius="15">
+        CornerRadius="10">
         <StackPanel>
-            <Border CornerRadius="15,15,0,0" Height="30" BorderThickness="0 0 0 1" BorderBrush="#D1D1D1" Background="#F9F8F9" MouseDown="TopBar_DragMove">
+            <Border CornerRadius="10,10,0,0" Height="30" BorderThickness="0 0 0 1" BorderBrush="#D1D1D1" Background="#F9F8F9" MouseDown="TopBar_DragMove" SnapsToDevicePixels="True">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
@@ -65,38 +69,50 @@
                     BorderThickness="0, 0, 1, 0" 
                     BorderBrush="#D1D1D1" 
                     Background="#F9F8F9"
-                    CornerRadius="0,0,0,15">
+                    CornerRadius="0,0,0,10">
                     <StackPanel>
                         <RadioButton 
-                            Content="Temperaturen"
+                            Content="Temperatures"
                             FontSize="14"
                             Margin="0,20,0,0"
                             Height="40"
                             BorderThickness="0"
                             Style="{StaticResource NavButton}"
-                                                        IsChecked="{Binding Converters,
-                                 Mode=TwoWay,
-                                 Converter={StaticResource BoolToEnumConverter},
-                                 ConverterParameter=Temperatur}"/>
+                            IsChecked="{Binding ConverterType, Mode=TwoWay, Converter={StaticResource BoolToEnumConverter}, ConverterParameter={x:Static local:ConverterTypes.Temperatur}}"/>
 
                         <RadioButton 
-                            Content="Nummersysteme"
+                            Content="Number Sytems"
                             FontSize="14"
                             Height="40"
                             BorderThickness="0"
                             Style="{StaticResource NavButton}"
-                            IsChecked="{Binding Converters,
-                                 Mode=TwoWay,
-                                 Converter={StaticResource BoolToEnumConverter},
-                                 ConverterParameter=NumberSystems}"/>
+                            IsChecked="{Binding ConverterType, Mode=TwoWay,Converter={StaticResource BoolToEnumConverter}, ConverterParameter={x:Static local:ConverterTypes.NumberSystems}}"/>
                     </StackPanel>
                 </Border>
                 <Border
                     Grid.Column="1"
-                    Background="White"
-                    CornerRadius="0,0,15,0">
-                    <ListView Name="listView" Height="300" Width="240">
-                        
+                    Background="#FFFEFF"
+                    CornerRadius="0,0,10,0">
+                    <ListView Name="listView" ItemsSource="{Binding Results}" Height="300" Width="240" Style="{StaticResource ResultView}" ItemContainerStyle="{StaticResource ResultViewItem}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="50" HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="180"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Height="30" Grid.Column="0" Grid.RowSpan="2" Background="Green" CornerRadius="15">
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14" FontWeight="Bold" Text="{Binding UnitFirstLetter}"/>
+                                    </Border>
+                                    <TextBlock Grid.Column="1" Text="{Binding UnitName}" VerticalAlignment="Bottom" Margin="10,0,0,0" FontWeight="Bold"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding UnitName}" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                 </Border>
             </Grid>

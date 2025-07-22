@@ -16,5 +16,11 @@
     <Page Update="NavButton.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="ResultView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ResultViewItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

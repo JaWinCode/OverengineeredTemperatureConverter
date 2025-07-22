@@ -8,6 +8,7 @@ namespace Converter.Wpf
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowVM();
         }
 
         private void TopBar_DragMove(object sender, MouseButtonEventArgs e)

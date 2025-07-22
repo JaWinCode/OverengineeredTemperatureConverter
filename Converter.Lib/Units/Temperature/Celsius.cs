@@ -4,7 +4,8 @@
     {
         private Celsius(decimal value) : base(value) { }
 
-        public override string Suffix { get; } = "°C";
+        public override string Suffix => "°C";
+        public static string Name = "Celsius";
 
         public static implicit operator Celsius(decimal value) => new(value);
 

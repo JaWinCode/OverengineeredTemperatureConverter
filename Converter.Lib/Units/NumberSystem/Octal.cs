@@ -4,7 +4,8 @@
     {
         private Octal(string value) : base(value) { }
 
-        public override string Suffix { get; } = "oct";
+        public override string Suffix => "oct";
+        public static string Name = "Octal";
 
         public static implicit operator Octal(string value) => new(value);
 

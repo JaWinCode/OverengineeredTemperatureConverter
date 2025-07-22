@@ -4,7 +4,8 @@
     {
         private Kelvin(decimal value) : base(value) { }
 
-        public override string Suffix { get; } = "K";
+        public override string Suffix => "K";
+        public static string Name = "Kelvin";
 
         public static implicit operator Kelvin(decimal value) => new(value);
 
