@@ -74,7 +74,10 @@
                             Height="40"
                             BorderThickness="0"
                             Style="{StaticResource NavButton}"
-                            IsChecked="{Binding Path=Converters, Converter={StaticResource BoolToEnumConverter}, ConverterParameter=Converters.Temperatur}"/>
+                                                        IsChecked="{Binding Converters,
+                                 Mode=TwoWay,
+                                 Converter={StaticResource BoolToEnumConverter},
+                                 ConverterParameter=Temperatur}"/>
 
                         <RadioButton 
                             Content="Nummersysteme"
@@ -82,7 +85,10 @@
                             Height="40"
                             BorderThickness="0"
                             Style="{StaticResource NavButton}"
-                            IsChecked="{Binding Path=Converters, Converter={StaticResource BoolToEnumConverter}, ConverterParameter=Converters.NumberSystems}"/>
+                            IsChecked="{Binding Converters,
+                                 Mode=TwoWay,
+                                 Converter={StaticResource BoolToEnumConverter},
+                                 ConverterParameter=NumberSystems}"/>
                     </StackPanel>
                 </Border>
                 <Border

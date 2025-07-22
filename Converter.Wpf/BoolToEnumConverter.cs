@@ -1,26 +1,25 @@
 ﻿namespace Converter.Wpf
 {
     using System.Globalization;
+    using System.Windows;
     using System.Windows.Data;
-
-    public class BoolToEnumConverter : IValueConverter
+    internal class BoolToEnumConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Enum enumValue && parameter is string enumString)
-            {
-                return enumValue.ToString() == enumString;
-            }
-            return false;
+            if (parameter == null || value == null)
+                return DependencyProperty.UnsetValue;
+
+            string enumString = parameter.ToString()!;
+            return value.ToString()!.Equals(enumString, StringComparison.Ordinal);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool boolValue && boolValue && parameter is string enumString)
-            {
-                return Enum.Parse(targetType, enumString);
-            }
-            return Binding.DoNothing;
+            if (parameter == null || value is not bool isChecked || !isChecked)
+                return Binding.DoNothing;
+
+            return Enum.Parse(targetType, parameter.ToString()!, ignoreCase: true);
         }
     }
 }
