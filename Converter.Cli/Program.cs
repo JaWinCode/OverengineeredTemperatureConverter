@@ -8,8 +8,9 @@
     {
         public static void Main(string[] args)
         {
-            new TemperatureConverter().DoConvert((Celsius)30, new Output());
-            new NumberSystemConverter().DoConvert((Binary)"10", new Output());
+            var output = new Output();
+            new TemperatureConverter().DoConvert((Celsius)30, output);
+            new NumberSystemConverter().DoConvert((Binary)"1010", output);
         }
     }
 }

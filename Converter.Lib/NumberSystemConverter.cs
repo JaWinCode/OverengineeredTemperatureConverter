@@ -10,6 +10,8 @@ namespace Converter.Lib
             {
                 new ConvertCallback((inputType) => (DecimalSys)(dynamic)inputType),
                 new ConvertCallback((inputType) => (Binary)(dynamic)inputType),
+                new ConvertCallback((inputType) => (Hex)(dynamic)inputType),
+                new ConvertCallback((inputType) => (Octal)(dynamic)inputType),
             };
         }
 
