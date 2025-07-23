@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using Converter.Lib;
@@ -27,6 +28,8 @@ namespace Converter.Wpf
         private ResultData? _firstUnitOption;
         private string? _unitValueInput;
         private Visibility _hintVisibility = Visibility.Visible;
+        private readonly DelegateCommand _hideHintCommand;
+        private readonly DelegateCommand _showHintCommand;
 
         internal MainWindowVM()
         {
@@ -50,6 +53,15 @@ namespace Converter.Wpf
             UpdateResultList();
 
             _firstUnitOption = _results.FirstOrDefault();
+
+            _hideHintCommand = new DelegateCommand(() => HintVisibility = Visibility.Hidden);
+            _showHintCommand = new DelegateCommand(() =>
+            {
+                if (string.IsNullOrWhiteSpace(UnitValueInput))
+                {
+                    HintVisibility = Visibility.Visible;
+                }
+            });
         }
 
         public ConverterTypes ConverterType
@@ -84,6 +96,11 @@ namespace Converter.Wpf
             {
                 _unitValueInput = value;
                 OnPropertyChanged();
+
+                if (IsInputValid())
+                {
+
+                }
             }
         }
 
@@ -98,25 +115,16 @@ namespace Converter.Wpf
             }
         }
 
-        public ICommand HideHintCommand
-        {
-            get
-            {
-                return new DelegateCommand(new Action(() => { HintVisibility = HintVisibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden; }));
-            }
-        }
+        public ICommand HideHintCommand => _hideHintCommand;
 
-        public ICommand ShowHintCommand
+        public ICommand ShowHintCommand => _showHintCommand;
+        public List<ResultData> Results
         {
-            get
+            get => _results;
+            set
             {
-                return new DelegateCommand(new Action(() =>
-                {
-                    if (string.IsNullOrWhiteSpace(UnitValueInput))
-                    {
-                        HintVisibility = Visibility.Visible;
-                    }
-                }));
+                OnPropertyChanged();
+                _results = value;
             }
         }
 
@@ -134,13 +142,23 @@ namespace Converter.Wpf
             GetFirstUnitOption = _results.FirstOrDefault();
         }
 
-        public List<ResultData> Results
+        private bool IsInputValid()
         {
-            get => _results;
-            set
+            if (_unitValueInput != null)
             {
-                OnPropertyChanged();
-                _results = value;
+                switch (_converterType)
+                {
+                    case ConverterTypes.Temperatur:
+                        return Regex.IsMatch(_unitValueInput, "^[0-9,]+$");
+                    case ConverterTypes.NumberSystems:
+                        return Regex.IsMatch(_unitValueInput, "^[0-9]+$");
+                    default:
+                        throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 

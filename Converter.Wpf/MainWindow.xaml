@@ -103,10 +103,10 @@
                                 <Grid>
                                     <TextBox Text="{Binding UnitValueInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0" >
                                         <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="GotFocus">
+                                            <i:EventTrigger EventName="GotKeyboardFocus">
                                                 <behaviors:InvokeCommandAction Command="{Binding HideHintCommand}"/>
                                             </i:EventTrigger>
-                                            <i:EventTrigger EventName="LostFocus">
+                                            <i:EventTrigger EventName="LostKeyboardFocus">
                                                 <behaviors:InvokeCommandAction Command="{Binding ShowHintCommand}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
