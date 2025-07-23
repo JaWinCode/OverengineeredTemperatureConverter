@@ -106,6 +106,9 @@
                                             <i:EventTrigger EventName="GotFocus">
                                                 <behaviors:InvokeCommandAction Command="{Binding HideHintCommand}"/>
                                             </i:EventTrigger>
+                                            <i:EventTrigger EventName="LostFocus">
+                                                <behaviors:InvokeCommandAction Command="{Binding ShowHintCommand}"/>
+                                            </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </TextBox>
                                     <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40" Visibility="{Binding HintVisibility, Mode=TwoWay}"/>

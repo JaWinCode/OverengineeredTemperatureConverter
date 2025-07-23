@@ -26,8 +26,7 @@ namespace Converter.Wpf
         private List<ResultData> _results = new List<ResultData>();
         private ResultData? _firstUnitOption;
         private string? _unitValueInput;
-        private Visibility _hintVisibility;
-        private bool _keyboardFocusChanged;
+        private Visibility _hintVisibility = Visibility.Visible;
 
         internal MainWindowVM()
         {
@@ -85,15 +84,6 @@ namespace Converter.Wpf
             {
                 _unitValueInput = value;
                 OnPropertyChanged();
-
-                if (!string.IsNullOrWhiteSpace(_unitValueInput))
-                {
-                    HintVisibility = Visibility.Hidden;
-                }
-                else
-                {
-                    HintVisibility = Visibility.Visible;
-                }
             }
         }
 
@@ -108,28 +98,26 @@ namespace Converter.Wpf
             }
         }
 
-        public bool KeyboardFocusChanged
-        {
-            get
-            {
-                HintVisibility = Visibility.Hidden;
-                return _keyboardFocusChanged;
-            }
-
-            set
-            {
-                _keyboardFocusChanged = value;
-                OnPropertyChanged();
-            }
-        }
-
         public ICommand HideHintCommand
         {
             get
             {
                 return new DelegateCommand(new Action(() => { HintVisibility = HintVisibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden; }));
             }
+        }
 
+        public ICommand ShowHintCommand
+        {
+            get
+            {
+                return new DelegateCommand(new Action(() =>
+                {
+                    if (string.IsNullOrWhiteSpace(UnitValueInput))
+                    {
+                        HintVisibility = Visibility.Visible;
+                    }
+                }));
+            }
         }
 
         private void UpdateResultList()
