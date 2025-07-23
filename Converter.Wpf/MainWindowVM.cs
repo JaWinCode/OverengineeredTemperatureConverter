@@ -21,6 +21,7 @@ namespace Converter.Wpf
         private List<ResultData> _tempUnitValues;
         private List<ResultData> _numberSystemUnitValues;
         private List<ResultData> _results = new List<ResultData>();
+        private ResultData? _firstUnitOption;
 
         internal MainWindowVM()
         {
@@ -42,15 +43,30 @@ namespace Converter.Wpf
             };
 
             UpdateResultList();
+
+            _firstUnitOption = _results.FirstOrDefault();
         }
 
         public ConverterTypes ConverterType
         {
-            get => _converterType;
+            get 
+            {
+                UpdateResultList();
+                return _converterType;
+            }
+            
             set
             {
                 _converterType = value;
-                UpdateResultList();
+                OnPropertyChanged();
+            }
+        }
+
+        public ResultData? GetFirstUnitOption
+        {
+            get => _results.FirstOrDefault();
+            set
+            {
                 OnPropertyChanged();
             }
         }
@@ -60,15 +76,22 @@ namespace Converter.Wpf
             switch (_converterType)
             {
                 case ConverterTypes.Temperatur:
-                    _results = _tempUnitValues;
+                    Results = _tempUnitValues;
                     break;
                 case ConverterTypes.NumberSystems:
-                    _results = _numberSystemUnitValues;
+                    Results = _numberSystemUnitValues;
                     break;
             }
         }
 
-        public List<ResultData> Results { get => _results; set { OnPropertyChanged(); } }
+        public List<ResultData> Results 
+        { 
+            get => _results; 
+            set { 
+                OnPropertyChanged(); 
+                _results = value;
+            } 
+        }
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

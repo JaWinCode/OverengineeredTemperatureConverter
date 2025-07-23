@@ -11,20 +11,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
-                    <Border x:Name="Bd"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="5"
-                            BorderBrush="Black"
-                            BorderThickness="0.1">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="5"
+                        BorderBrush="Black"
+                        BorderThickness="0.1">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="5" ShadowDepth="1" Color="#ECEDED"/>
                         </Border.Effect>
                         <ContentPresenter
+                            Focusable="False"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Focusable" Value="False" />
     </Style>
 </ResourceDictionary>

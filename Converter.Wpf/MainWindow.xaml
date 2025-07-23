@@ -93,27 +93,36 @@
                     Grid.Column="1"
                     Background="#FFFEFF"
                     CornerRadius="0,0,10,0">
-                    <ListView Name="listView" ItemsSource="{Binding Results}" Height="300" Width="240" Style="{StaticResource ResultView}" ItemContainerStyle="{StaticResource ResultViewItem}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Height="50" HorizontalAlignment="Center">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30"/>
-                                        <ColumnDefinition Width="180"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border Height="30" Grid.Column="0" Grid.RowSpan="2" Background="Green" CornerRadius="15">
-                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14" FontWeight="Bold" Text="{Binding UnitFirstLetter}"/>
-                                    </Border>
-                                    <TextBlock Grid.Column="1" Text="{Binding UnitName}" VerticalAlignment="Bottom" Margin="10,0,0,0" FontWeight="Bold"/>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding UnitName}" VerticalAlignment="Top" Margin="10,0,0,0"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <StackPanel>
+                        <Grid Height="30" Width="240">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}"/>
+                        </Grid>
+                        <ListView Name="listView" ItemsSource="{Binding Results}" Height="300" Width="240" Style="{StaticResource ResultView}" ItemContainerStyle="{StaticResource ResultViewItem}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="50" HorizontalAlignment="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="180"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Height="30" Grid.Column="0" Grid.RowSpan="2" Background="Green" CornerRadius="15">
+                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14" FontWeight="Bold" Text="{Binding UnitFirstLetter}"/>
+                                        </Border>
+                                        <TextBlock Grid.Column="1" Text="{Binding UnitName}" VerticalAlignment="Bottom" Margin="10,0,0,0" FontWeight="Bold"/>
+                                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding UnitName}" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
                 </Border>
             </Grid>
         </StackPanel>
