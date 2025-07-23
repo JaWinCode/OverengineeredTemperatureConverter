@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="NavButton.xaml"/>
                 <ResourceDictionary Source="ResultView.xaml"/>
                 <ResourceDictionary Source="ResultViewItem.xaml"/>
+                <ResourceDictionary Source="HintTextbox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

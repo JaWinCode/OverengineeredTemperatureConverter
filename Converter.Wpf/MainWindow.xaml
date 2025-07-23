@@ -11,9 +11,6 @@
         Background="Transparent"
         UseLayoutRounding="True"
         Title="Converter" Height="450" Width="800">
-    <Window.Resources>
-        <local:BoolToEnumConverter x:Key="BoolToEnumConverter" />
-    </Window.Resources>
     <Border
         BorderBrush="#D1D1D1"
         BorderThickness="1"
@@ -100,7 +97,7 @@
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox/>
+                                <TextBox Text="{Binding UnitValueInput}" Style="{StaticResource HintTextBox}" Tag="Enter Value!"/>
                                 <ComboBox Grid.Column="1" ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}" VerticalContentAlignment="Center"/>
                             </Grid>
                         </Border>

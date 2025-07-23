@@ -4,9 +4,11 @@
     <Color x:Key="BtnDefault">#F9F8F9</Color>
     <Color x:Key="BtnActive">#6BA2A3</Color>
 
-    <SolidColorBrush x:Key="BtnDefaultBrush" Color="{StaticResource BtnDefault}"></SolidColorBrush>
-    <SolidColorBrush x:Key="BtnActiveBrush" Color="{StaticResource BtnActive}"></SolidColorBrush>
+    <SolidColorBrush x:Key="BtnDefaultBrush" Color="{StaticResource BtnDefault}"/>
+    <SolidColorBrush x:Key="BtnActiveBrush" Color="{StaticResource BtnActive}"/>
 
     <BitmapImage x:Key="CloseImage" UriSource="/Images/close.png" />
-
+    
+    <local:BoolToEnumConverter x:Key="BoolToEnumConverter" />
+    <local:VisibilityConverter x:Key="VisibillityConverter" />
 </ResourceDictionary>
