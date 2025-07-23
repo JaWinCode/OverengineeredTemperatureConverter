@@ -97,7 +97,10 @@
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding UnitValueInput}" Style="{StaticResource HintTextBox}" Tag="Enter Value!"/>
+                                <Grid>
+                                    <TextBox Text="{Binding UnitValueInput}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0"/>
+                                    <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40"/>
+                                </Grid>
                                 <ComboBox Grid.Column="1" ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}" VerticalContentAlignment="Center"/>
                             </Grid>
                         </Border>

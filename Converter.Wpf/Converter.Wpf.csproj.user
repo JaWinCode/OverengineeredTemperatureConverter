@@ -7,9 +7,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="HintTextbox.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Resources.xaml">
       <SubType>Designer</SubType>
     </Page>
