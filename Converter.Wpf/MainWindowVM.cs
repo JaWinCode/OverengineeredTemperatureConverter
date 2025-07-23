@@ -22,6 +22,7 @@ namespace Converter.Wpf
         private List<ResultData> _numberSystemUnitValues;
         private List<ResultData> _results = new List<ResultData>();
         private ResultData? _firstUnitOption;
+        private string? _unitValueInput;
 
         internal MainWindowVM()
         {
@@ -64,9 +65,20 @@ namespace Converter.Wpf
 
         public ResultData? GetFirstUnitOption
         {
-            get => _results.FirstOrDefault();
+            get => _firstUnitOption;
             set
             {
+                _firstUnitOption = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string? UnitValueInput
+        {
+            get => _unitValueInput;
+            set
+            {
+                _unitValueInput = value;
                 OnPropertyChanged();
             }
         }
@@ -82,6 +94,7 @@ namespace Converter.Wpf
                     Results = _numberSystemUnitValues;
                     break;
             }
+            GetFirstUnitOption = _results.FirstOrDefault();
         }
 
         public List<ResultData> Results 

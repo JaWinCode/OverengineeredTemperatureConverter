@@ -94,13 +94,16 @@
                     Background="#FFFEFF"
                     CornerRadius="0,0,10,0">
                     <StackPanel>
-                        <Grid Height="30" Width="240">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <ComboBox ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}"/>
-                        </Grid>
+                        <Border Height="30" Width="240" Padding="4,0,4,0" Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox/>
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}" VerticalContentAlignment="Center"/>
+                            </Grid>
+                        </Border>
                         <ListView Name="listView" ItemsSource="{Binding Results}" Height="300" Width="240" Style="{StaticResource ResultView}" ItemContainerStyle="{StaticResource ResultViewItem}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
