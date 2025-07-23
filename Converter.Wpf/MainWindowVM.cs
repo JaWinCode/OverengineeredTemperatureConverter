@@ -23,6 +23,7 @@ namespace Converter.Wpf
         private List<ResultData> _results = new List<ResultData>();
         private ResultData? _firstUnitOption;
         private string? _unitValueInput;
+        private bool _isHintVisible;
 
         internal MainWindowVM()
         {
@@ -79,6 +80,26 @@ namespace Converter.Wpf
             set
             {
                 _unitValueInput = value;
+                OnPropertyChanged();
+
+                if (!string.IsNullOrWhiteSpace(_unitValueInput))
+                {
+                    IsHintVisible = false;
+                }
+                else
+                {
+                    IsHintVisible = true;
+                }
+            }
+        }
+
+        public bool IsHintVisible
+        {
+            get => _isHintVisible;
+
+            set
+            {
+                _isHintVisible = value;
                 OnPropertyChanged();
             }
         }

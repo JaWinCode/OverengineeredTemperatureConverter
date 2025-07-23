@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Converter.Wpf
@@ -22,6 +23,14 @@ namespace Converter.Wpf
         private void Close_Window(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Clear_Focus(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is not TextBox)
+            {
+                Keyboard.ClearFocus();
+            }
         }
     }
 }

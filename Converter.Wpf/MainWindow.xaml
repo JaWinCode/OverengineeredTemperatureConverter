@@ -10,7 +10,8 @@
         AllowsTransparency="True"
         Background="Transparent"
         UseLayoutRounding="True"
-        Title="Converter" Height="450" Width="800">
+        Title="Converter" Height="450" Width="800"
+        PreviewMouseDown="Clear_Focus">
     <Border
         BorderBrush="#D1D1D1"
         BorderThickness="1"
@@ -98,8 +99,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid>
-                                    <TextBox Text="{Binding UnitValueInput}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0"/>
-                                    <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40"/>
+                                    <TextBox Text="{Binding UnitValueInput, Mode=TwoWay}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0"/>
+                                    <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40" Visibility="{Binding IsHintVisible}"/>
                                 </Grid>
                                 <ComboBox Grid.Column="1" ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}" VerticalContentAlignment="Center"/>
                             </Grid>
