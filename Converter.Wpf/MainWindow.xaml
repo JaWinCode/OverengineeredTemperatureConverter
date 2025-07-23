@@ -99,8 +99,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid>
-                                    <TextBox Text="{Binding UnitValueInput, Mode=TwoWay}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0"/>
-                                    <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40" Visibility="{Binding IsHintVisible}"/>
+                                    <TextBox Text="{Binding UnitValueInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0"/>
+                                    <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40" Visibility="{Binding IsHintVisible, Mode=TwoWay}"/>
                                 </Grid>
                                 <ComboBox Grid.Column="1" ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}" VerticalContentAlignment="Center"/>
                             </Grid>
