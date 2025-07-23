@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Converter.Wpf"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -99,8 +101,14 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid>
-                                    <TextBox Text="{Binding UnitValueInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0"/>
-                                    <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40" Visibility="{Binding IsHintVisible, Mode=TwoWay}"/>
+                                    <TextBox Text="{Binding UnitValueInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="GotFocus">
+                                                <behaviors:InvokeCommandAction Command="{Binding HideHintCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                    <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40" Visibility="{Binding HintVisibility, Mode=TwoWay}"/>
                                 </Grid>
                                 <ComboBox Grid.Column="1" ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}" VerticalContentAlignment="Center"/>
                             </Grid>

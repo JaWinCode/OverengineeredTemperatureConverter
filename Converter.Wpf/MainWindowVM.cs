@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
 using Converter.Lib;
 using Converter.Lib.Units.NumberSystem;
 using Converter.Lib.Units.TemperatureUnits;
+using Prism.Commands;
 
 namespace Converter.Wpf
 {
@@ -23,7 +26,8 @@ namespace Converter.Wpf
         private List<ResultData> _results = new List<ResultData>();
         private ResultData? _firstUnitOption;
         private string? _unitValueInput;
-        private bool _isHintVisible;
+        private Visibility _hintVisibility;
+        private bool _keyboardFocusChanged;
 
         internal MainWindowVM()
         {
@@ -51,12 +55,12 @@ namespace Converter.Wpf
 
         public ConverterTypes ConverterType
         {
-            get 
+            get
             {
                 UpdateResultList();
                 return _converterType;
             }
-            
+
             set
             {
                 _converterType = value;
@@ -84,24 +88,48 @@ namespace Converter.Wpf
 
                 if (!string.IsNullOrWhiteSpace(_unitValueInput))
                 {
-                    IsHintVisible = false;
+                    HintVisibility = Visibility.Hidden;
                 }
                 else
                 {
-                    IsHintVisible = true;
+                    HintVisibility = Visibility.Visible;
                 }
             }
         }
 
-        public bool IsHintVisible
+        public Visibility HintVisibility
         {
-            get => _isHintVisible;
+            get => _hintVisibility;
 
             set
             {
-                _isHintVisible = value;
+                _hintVisibility = value;
                 OnPropertyChanged();
             }
+        }
+
+        public bool KeyboardFocusChanged
+        {
+            get
+            {
+                HintVisibility = Visibility.Hidden;
+                return _keyboardFocusChanged;
+            }
+
+            set
+            {
+                _keyboardFocusChanged = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand HideHintCommand
+        {
+            get
+            {
+                return new DelegateCommand(new Action(() => { HintVisibility = HintVisibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden; }));
+            }
+
         }
 
         private void UpdateResultList()
@@ -118,13 +146,14 @@ namespace Converter.Wpf
             GetFirstUnitOption = _results.FirstOrDefault();
         }
 
-        public List<ResultData> Results 
-        { 
-            get => _results; 
-            set { 
-                OnPropertyChanged(); 
+        public List<ResultData> Results
+        {
+            get => _results;
+            set
+            {
+                OnPropertyChanged();
                 _results = value;
-            } 
+            }
         }
 
 
