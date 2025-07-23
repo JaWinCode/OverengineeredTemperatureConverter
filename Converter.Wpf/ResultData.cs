@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Converter.Wpf
 {
-    internal class ResultData
+    internal class ResultData : INotifyPropertyChanged
     {
         private string? _result;
         public string UnitFirstLetter { get => UnitName.FirstOrDefault().ToString(); }

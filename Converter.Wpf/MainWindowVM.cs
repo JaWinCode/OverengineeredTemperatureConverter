@@ -21,7 +21,11 @@ namespace Converter.Wpf
         Kelvin,
         Fahrenheit,
         Rankine,
-        Reaumur
+        Réaumur,
+        Decimal,
+        Binary,
+        Hex,
+        Octal
     }
 
     internal class MainWindowVM : INotifyPropertyChanged
@@ -95,6 +99,11 @@ namespace Converter.Wpf
             {
                 _unitOption = value;
                 OnPropertyChanged();
+
+                if (IsInputValid())
+                {
+                    Convert();
+                }
             }
         }
 
@@ -163,7 +172,27 @@ namespace Converter.Wpf
                     case ConverterTypes.Temperatur:
                         return Regex.IsMatch(_unitValueInput, "^[0-9,]+$");
                     case ConverterTypes.NumberSystems:
-                        return Regex.IsMatch(_unitValueInput, "^[0-9]+$");
+
+                        if (UnitOption != null && UnitValueInput != null && Enum.TryParse(UnitOption.UnitName, true, out AllUnits unitValueInput))
+                        {
+                            switch (unitValueInput)
+                            {
+                                case AllUnits.Decimal:
+                                    return Regex.IsMatch(_unitValueInput, "^[0-9]+$");
+                                case AllUnits.Binary:
+                                    return Regex.IsMatch(_unitValueInput, "^[01]+$");
+                                case AllUnits.Hex:
+                                    return Regex.IsMatch(_unitValueInput, "^[0-9A-F]+$");
+                                case AllUnits.Octal:
+                                    return Regex.IsMatch(_unitValueInput, "^[0-9A-F]+$");
+                                default:
+                                    throw new NotImplementedException();
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     default:
                         throw new NotImplementedException();
                 }
@@ -193,10 +222,21 @@ namespace Converter.Wpf
                     case AllUnits.Rankine:
                         _tempConv.DoConvert((Rankine)decimal.Parse(UnitValueInput), _output);
                         break;
-                    case AllUnits.Reaumur:
+                    case AllUnits.Réaumur:
                         _tempConv.DoConvert((Reaumur)decimal.Parse(UnitValueInput), _output);
                         break;
-
+                    case AllUnits.Decimal:
+                        _numSysConv.DoConvert((DecimalSys)UnitValueInput, _output);
+                        break;
+                    case AllUnits.Binary:
+                        _numSysConv.DoConvert((Binary)UnitValueInput, _output);
+                        break;
+                    case AllUnits.Hex:
+                        _numSysConv.DoConvert((Hex)UnitValueInput, _output);
+                        break;
+                    case AllUnits.Octal:
+                        _numSysConv.DoConvert((Octal)UnitValueInput, _output);
+                        break;
                 }
 
                 int count = Math.Min(Results.Count, _output.OutputList.Count);
@@ -206,8 +246,6 @@ namespace Converter.Wpf
                     Results[i].Result = _output.OutputList[i];
 
                 }
-
-                UpdateResultList();
             }
 
         }
