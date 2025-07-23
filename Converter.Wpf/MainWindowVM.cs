@@ -59,7 +59,7 @@ namespace Converter.Wpf
                 new ResultData() { UnitName = Octal.Name }
             };
 
-            ResetAndUpdateResultList();
+            UpdateResultList();
 
             _unitOption = _results.FirstOrDefault();
 
@@ -77,13 +77,13 @@ namespace Converter.Wpf
         {
             get
             {
-                ResetAndUpdateResultList();
                 return _converterType;
             }
 
             set
             {
                 _converterType = value;
+                UpdateResultList();
                 OnPropertyChanged();
             }
         }
@@ -137,8 +137,9 @@ namespace Converter.Wpf
             }
         }
 
-        private void ResetAndUpdateResultList()
+        private void UpdateResultList()
         {
+
             switch (_converterType)
             {
                 case ConverterTypes.Temperatur:
@@ -150,6 +151,7 @@ namespace Converter.Wpf
             }
 
             UnitOption = _results.FirstOrDefault();
+
         }
 
         private bool IsInputValid()
@@ -202,7 +204,10 @@ namespace Converter.Wpf
                 for (int i = 0; i < count; i++)
                 {
                     Results[i].Result = _output.OutputList[i];
+
                 }
+
+                UpdateResultList();
             }
 
         }
