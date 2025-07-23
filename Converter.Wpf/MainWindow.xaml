@@ -113,7 +113,7 @@
                                     </TextBox>
                                     <TextBlock Text="Enter Value!" VerticalAlignment="Center" Padding="10,0,10,0" IsHitTestVisible="False" Foreground="#343a40" Visibility="{Binding HintVisibility, Mode=TwoWay}"/>
                                 </Grid>
-                                <ComboBox Grid.Column="1" ItemsSource="{Binding Results}" DisplayMemberPath="UnitName" SelectedItem="{Binding GetFirstUnitOption, Mode=TwoWay}" VerticalContentAlignment="Center"/>
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding Results, Mode=TwoWay}" DisplayMemberPath="UnitName" SelectedItem="{Binding UnitOption, Mode=TwoWay}" VerticalContentAlignment="Center"/>
                             </Grid>
                         </Border>
                         <ListView Name="listView" ItemsSource="{Binding Results}" Height="300" Width="240" Style="{StaticResource ResultView}" ItemContainerStyle="{StaticResource ResultViewItem}">

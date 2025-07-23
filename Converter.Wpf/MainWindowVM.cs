@@ -132,8 +132,8 @@ namespace Converter.Wpf
             get => _results;
             set
             {
-                OnPropertyChanged();
                 _results = value;
+                OnPropertyChanged();
             }
         }
 
@@ -174,8 +174,9 @@ namespace Converter.Wpf
 
         private void Convert()
         {
-            if (UnitOption != null && UnitValueInput != null && Enum.TryParse(_unitValueInput, true, out AllUnits unitValueInput))
+            if (UnitOption != null && UnitValueInput != null && Enum.TryParse(UnitOption.UnitName, true, out AllUnits unitValueInput))
             {
+                _output.OutputList.Clear();
                 switch (unitValueInput)
                 {
                     case AllUnits.Celsius:
@@ -196,7 +197,9 @@ namespace Converter.Wpf
 
                 }
 
-                for (int i = 0; i < Results.Count; i++)
+                int count = Math.Min(Results.Count, _output.OutputList.Count);
+
+                for (int i = 0; i < count; i++)
                 {
                     Results[i].Result = _output.OutputList[i];
                 }

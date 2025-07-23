@@ -9,7 +9,7 @@
         public static void Main(string[] args)
         {
             var output = new Output();
-            new TemperatureConverter().DoConvert((Celsius)30, output);
+            new TemperatureConverter().DoConvert((Celsius)1, output);
             new NumberSystemConverter().DoConvert((Binary)"1010", output);
         }
     }
