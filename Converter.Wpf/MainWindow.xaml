@@ -128,7 +128,7 @@
                                             <ColumnDefinition Width="30"/>
                                             <ColumnDefinition Width="180"/>
                                         </Grid.ColumnDefinitions>
-                                        <Border Height="30" Grid.Column="0" Grid.RowSpan="2" Background="Green" CornerRadius="15">
+                                        <Border Height="30" Grid.Column="0" Grid.RowSpan="2" Background="{Binding SelectedColor, Mode=TwoWay}" CornerRadius="15">
                                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14" FontWeight="Bold" Text="{Binding UnitFirstLetter}"/>
                                         </Border>
                                         <TextBlock Grid.Column="1" Text="{Binding UnitName}" VerticalAlignment="Bottom" Margin="10,0,0,0" FontWeight="Bold"/>

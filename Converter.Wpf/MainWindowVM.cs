@@ -115,9 +115,17 @@ namespace Converter.Wpf
                 _unitValueInput = value;
                 OnPropertyChanged();
 
-                if (IsInputValid())
+                if (string.IsNullOrWhiteSpace(_unitValueInput))
+                {
+                    ClearResults();
+                }
+                else if (IsInputValid())
                 {
                     Convert();
+                }
+                else
+                {
+                    ClearResults();
                 }
             }
         }
@@ -148,6 +156,7 @@ namespace Converter.Wpf
 
         private void UpdateResultList()
         {
+            ClearResults();
 
             switch (_converterType)
             {
@@ -182,9 +191,9 @@ namespace Converter.Wpf
                                 case AllUnits.Binary:
                                     return Regex.IsMatch(_unitValueInput, "^[01]+$");
                                 case AllUnits.Hex:
-                                    return Regex.IsMatch(_unitValueInput, "^[0-9A-F]+$");
+                                    return Regex.IsMatch(_unitValueInput, "^[0-9a-fA-F]+$");
                                 case AllUnits.Octal:
-                                    return Regex.IsMatch(_unitValueInput, "^[0-9A-F]+$");
+                                    return Regex.IsMatch(_unitValueInput, "^[0-8]+$");
                                 default:
                                     throw new NotImplementedException();
                             }
@@ -232,7 +241,7 @@ namespace Converter.Wpf
                         _numSysConv.DoConvert((Binary)UnitValueInput, _output);
                         break;
                     case AllUnits.Hex:
-                        _numSysConv.DoConvert((Hex)UnitValueInput, _output);
+                        _numSysConv.DoConvert((Hex)UnitValueInput.ToUpper(), _output);
                         break;
                     case AllUnits.Octal:
                         _numSysConv.DoConvert((Octal)UnitValueInput, _output);
@@ -244,10 +253,32 @@ namespace Converter.Wpf
                 for (int i = 0; i < count; i++)
                 {
                     Results[i].Result = _output.OutputList[i];
-
                 }
             }
 
+        }
+
+        private void ClearResults()
+        {
+            switch (_converterType)
+            {
+                case ConverterTypes.Temperatur:
+                    foreach (var result in _tempUnitValues)
+                    {
+                        result.Result = null;
+                    }
+                   break;
+
+                case ConverterTypes.NumberSystems:
+                    foreach (var result in _numberSystemUnitValues)
+                    {
+                        result.Result = null;
+                    }
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
