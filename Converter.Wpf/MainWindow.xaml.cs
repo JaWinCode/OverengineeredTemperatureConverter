@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Converter.Wpf
 {
@@ -27,10 +28,33 @@ namespace Converter.Wpf
 
         private void Clear_Focus(object sender, MouseButtonEventArgs e)
         {
-            if (e.OriginalSource is not TextBox)
+            var src = e.OriginalSource as DependencyObject;
+            if (src is null)
+            {
+                Keyboard.ClearFocus();
+                return;
+            }
+
+            if (!IsWithinControl<TextBox>(src) &&
+                !IsWithinControl<ComboBox>(src) &&
+                !IsWithinControl<ComboBoxItem>(src))
             {
                 Keyboard.ClearFocus();
             }
+        }
+
+        private static bool IsWithinControl<T>(DependencyObject element) where T : DependencyObject
+        {
+            while (element != null)
+            {
+                if (element is T)
+                {
+                    return true;
+                }
+                element = VisualTreeHelper.GetParent(element);
+            }
+
+            return false;
         }
     }
 }

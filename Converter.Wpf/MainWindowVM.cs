@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Converter.Lib;
 using Converter.Lib.Units.NumberSystem;
 using Converter.Lib.Units.TemperatureUnits;
-using Prism.Commands;
 
 namespace Converter.Wpf
 {
@@ -14,6 +13,15 @@ namespace Converter.Wpf
     {
         Temperatur,
         NumberSystems
+    }
+
+    internal enum AllUnits
+    {
+        Celsius,
+        Kelvin,
+        Fahrenheit,
+        Rankine,
+        Reaumur
     }
 
     internal class MainWindowVM : INotifyPropertyChanged
@@ -25,11 +33,12 @@ namespace Converter.Wpf
         private List<ResultData> _tempUnitValues;
         private List<ResultData> _numberSystemUnitValues;
         private List<ResultData> _results = new List<ResultData>();
-        private ResultData? _firstUnitOption;
+        private ResultData? _unitOption;
         private string? _unitValueInput;
         private Visibility _hintVisibility = Visibility.Visible;
         private readonly DelegateCommand _hideHintCommand;
         private readonly DelegateCommand _showHintCommand;
+        private Output _output = new();
 
         internal MainWindowVM()
         {
@@ -50,9 +59,9 @@ namespace Converter.Wpf
                 new ResultData() { UnitName = Octal.Name }
             };
 
-            UpdateResultList();
+            ResetAndUpdateResultList();
 
-            _firstUnitOption = _results.FirstOrDefault();
+            _unitOption = _results.FirstOrDefault();
 
             _hideHintCommand = new DelegateCommand(() => HintVisibility = Visibility.Hidden);
             _showHintCommand = new DelegateCommand(() =>
@@ -68,7 +77,7 @@ namespace Converter.Wpf
         {
             get
             {
-                UpdateResultList();
+                ResetAndUpdateResultList();
                 return _converterType;
             }
 
@@ -79,12 +88,12 @@ namespace Converter.Wpf
             }
         }
 
-        public ResultData? GetFirstUnitOption
+        public ResultData? UnitOption
         {
-            get => _firstUnitOption;
+            get => _unitOption;
             set
             {
-                _firstUnitOption = value;
+                _unitOption = value;
                 OnPropertyChanged();
             }
         }
@@ -99,7 +108,7 @@ namespace Converter.Wpf
 
                 if (IsInputValid())
                 {
-
+                    Convert();
                 }
             }
         }
@@ -128,7 +137,7 @@ namespace Converter.Wpf
             }
         }
 
-        private void UpdateResultList()
+        private void ResetAndUpdateResultList()
         {
             switch (_converterType)
             {
@@ -139,7 +148,8 @@ namespace Converter.Wpf
                     Results = _numberSystemUnitValues;
                     break;
             }
-            GetFirstUnitOption = _results.FirstOrDefault();
+
+            UnitOption = _results.FirstOrDefault();
         }
 
         private bool IsInputValid()
@@ -162,6 +172,37 @@ namespace Converter.Wpf
             }
         }
 
+        private void Convert()
+        {
+            if (UnitOption != null && UnitValueInput != null && Enum.TryParse(_unitValueInput, true, out AllUnits unitValueInput))
+            {
+                switch (unitValueInput)
+                {
+                    case AllUnits.Celsius:
+                        _tempConv.DoConvert((Celsius)decimal.Parse(UnitValueInput), _output);
+                        break;
+                    case AllUnits.Kelvin:
+                        _tempConv.DoConvert((Kelvin)decimal.Parse(UnitValueInput), _output);
+                        break;
+                    case AllUnits.Fahrenheit:
+                        _tempConv.DoConvert((Fahrenheit)decimal.Parse(UnitValueInput), _output);
+                        break;
+                    case AllUnits.Rankine:
+                        _tempConv.DoConvert((Rankine)decimal.Parse(UnitValueInput), _output);
+                        break;
+                    case AllUnits.Reaumur:
+                        _tempConv.DoConvert((Reaumur)decimal.Parse(UnitValueInput), _output);
+                        break;
+
+                }
+
+                for (int i = 0; i < Results.Count; i++)
+                {
+                    Results[i].Result = _output.OutputList[i];
+                }
+            }
+
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string? p = null)

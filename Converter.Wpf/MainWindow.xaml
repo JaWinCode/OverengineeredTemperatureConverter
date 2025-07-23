@@ -97,8 +97,8 @@
                         <Border Height="30" Width="240" Padding="4,0,4,0" Margin="10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
                                     <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid>
                                     <TextBox Text="{Binding UnitValueInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0" >
@@ -132,7 +132,7 @@
                                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="14" FontWeight="Bold" Text="{Binding UnitFirstLetter}"/>
                                         </Border>
                                         <TextBlock Grid.Column="1" Text="{Binding UnitName}" VerticalAlignment="Bottom" Margin="10,0,0,0" FontWeight="Bold"/>
-                                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding UnitName}" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Result}" VerticalAlignment="Top" Margin="10,0,0,0"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
