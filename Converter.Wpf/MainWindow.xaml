@@ -101,7 +101,7 @@
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid>
-                                    <TextBox Text="{Binding UnitValueInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0" >
+                                    <TextBox Text="{Binding UnitValueInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Enter Value!" VerticalContentAlignment="Center" Padding="10,0,10,0" MaxLength="7">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="GotKeyboardFocus">
                                                 <behaviors:InvokeCommandAction Command="{Binding HideHintCommand}"/>
