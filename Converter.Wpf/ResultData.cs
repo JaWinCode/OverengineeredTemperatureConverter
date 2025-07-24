@@ -13,7 +13,7 @@ namespace Converter.Wpf
             "#2D87B6",
             "#8A58DC"
         };
-        private short _selectedListViewColorIndex = 0;
+        private static short _selectedListViewColorIndex = 0;
         private string _selectedColor = string.Empty;
 
         public ResultData()
